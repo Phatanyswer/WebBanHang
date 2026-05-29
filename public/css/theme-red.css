@@ -1,0 +1,120 @@
+/* Theme: White background with red accents (SopCuaPhat)
+   Overrides core variables and provides button styles for emphasis */
+:root {
+  --bg-white: #ffffff;
+  --bg-muted: #f7f7f8;
+  --accent-red: #d9303e; /* primary brand red */
+  --accent-red-dark: #b02a32;
+  --accent-red-soft: rgba(217,48,62,0.08);
+  --text-dark: #111115;
+  --muted: #6b6b6f;
+  --nav-bg: #ffffff;
+  --nav-border: rgba(0,0,0,0.06);
+  --nav-link: #222226;
+  --nav-link-hover: var(--accent-red);
+  --nav-brand: var(--text-dark);
+  --btn-primary-bg: linear-gradient(90deg, var(--accent-red), var(--accent-red-dark));
+  --btn-primary-color: #ffffff;
+  --card-bg: #ffffff;
+  --glass-bg: #ffffff;
+  --glass-border: rgba(0,0,0,0.06);
+}
+
+/* Light theme enforcement */
+[data-theme="light"] {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+body {
+  background: var(--bg-muted);
+  color: var(--text-dark);
+}
+
+/* Navbar */
+.navbar {
+  background: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.navbar .navbar-brand {
+  color: var(--nav-brand) !important;
+}
+
+.nav-link {
+  color: var(--nav-link) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--nav-link-hover) !important;
+}
+
+/* Emphasized primary button */
+.btn-premium {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color) !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(208, 46, 56, 0.18);
+  font-weight: 600;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(208,46,56,0.22);
+}
+
+/* Secondary pill with red outline */
+.btn-secondary-pill {
+  background: transparent;
+  border: 1.5px solid var(--accent-red);
+  color: var(--accent-red) !important;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.btn-glass-secondary {
+  background: var(--bg-white);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dark);
+}
+
+/* Danger/Action buttons more prominent */
+.btn-premium-danger {
+  background: var(--accent-red) !important;
+  box-shadow: 0 6px 18px rgba(208,46,56,0.14);
+}
+
+/* Card surfaces */
+.glass-card, .product-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 6px 20px rgba(24,24,24,0.04);
+}
+
+/* Inputs */
+.form-control, .form-control-glass {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--text-dark);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  box-shadow: 0 4px 14px rgba(208,46,56,0.08);
+  border-color: var(--accent-red);
+}
+
+/* Small accent utility */
+.text-accent { color: var(--accent-red); }
+.badge-accent { background: var(--accent-red); color: white; }
+
+/* Footer adjustments */
+.footer {
+  background: transparent;
+  color: var(--muted);
+}
