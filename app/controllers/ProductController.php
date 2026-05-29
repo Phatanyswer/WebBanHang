@@ -234,8 +234,11 @@ class ProductController
             exit();
         }
 
-        if ($this->productModel->deleteProduct($id)) {
+        $delResult = $this->productModel->deleteProduct($id);
+        if ($delResult === true) {
             $_SESSION['success_msg'] = "Đã xóa sản phẩm thành công!";
+        } elseif ($delResult === 'in_orders') {
+            $_SESSION['error_msg'] = "Không thể xóa sản phẩm vì đã có đơn hàng chứa sản phẩm này.";
         } else {
             $_SESSION['error_msg'] = "Đã xảy ra lỗi khi xóa sản phẩm.";
         }

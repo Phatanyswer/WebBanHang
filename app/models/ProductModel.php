@@ -223,6 +223,17 @@ class ProductModel
 
     public function deleteProduct($id)
     {
+        // Prevent deletion if the product appears in any order_details
+        $checkQuery = "SELECT COUNT(*) as cnt FROM order_details WHERE product_id = :id";
+        $checkStmt = $this->conn->prepare($checkQuery);
+        $checkStmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $checkStmt->execute();
+        $row = $checkStmt->fetch(PDO::FETCH_OBJ);
+        if ($row && $row->cnt > 0) {
+            // Signal to caller that product is part of existing orders
+            return 'in_orders';
+        }
+
         // First, get the product to find the image file path to delete it
         $product = $this->getProductById($id);
         if ($product && !empty($product->image) && file_exists($product->image)) {
@@ -231,7 +242,7 @@ class ProductModel
 
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             return true;
         }
